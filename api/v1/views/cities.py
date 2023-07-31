@@ -75,7 +75,7 @@ def city_put(city_id):
     for key, value in data.items():
         ignore_keys = ["id", "created_at", "updated_at"]
         if key not in ignore_keys:
-            city.bm_update(key, value)
+            city.update(key, value)
     city.save()
     city = city.to_json()
     return jsonify(city), 200
