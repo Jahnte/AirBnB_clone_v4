@@ -25,14 +25,11 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
-    try:
-        host = os.environ.get('HBNB_API_HOST')
-    except:
+    """run the Flask Server"""
+    host = os.environ.get('HBNB_API_HOST')
+    port = os.environ.get('HBNB_API_PORT')
+    if not host:
         host = '0.0.0.0'
-
-    try:
-        port = os.environ.get('HBNB_API_PORT')
-    except:
+    if not port:
         port = '5000'
-
-    app.run(host=host, port=port threaded=True)
+    app.run(host=host, port=port)
