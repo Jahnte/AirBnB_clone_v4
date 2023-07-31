@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """views the state objects"""
 
-from flask import jsonify, request, abort
+from flask import Flask, jsonify, request, abort
 from models import storage
 from models.state import State
 from api.v1.views import app_views
