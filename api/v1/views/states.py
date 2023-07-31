@@ -10,7 +10,7 @@ from api.v1.views import app_views
 def get_states():
     """Retrieves the list of all State objects"""
     states = storage.all(State).values()
-    return jsonify([state.to.dixt() for state in states])
+    return jsonify([state.to_dict() for state in states])
 
 @app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def get_state(state_id):
@@ -36,7 +36,7 @@ def delete_state(state_id):
 def create_state():
     """Creates a State object"""
     data = request.get_json()
-    if not data:
+    if data is None:
         abort(400, "Missing name")
     new_state = State(**data)
     new_state.save()
@@ -50,7 +50,7 @@ def update_state(state_id):
         data = request.get_json()
         if not data:
             abort(400, "Not a JSON")
-        for key. value in data.items():
+        for key, value in data.items():
             if key not in ['id', 'created_at', 'updated_at']:
                 setattr(state, key, value)
         state.save()
