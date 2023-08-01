@@ -12,7 +12,7 @@ from api.v1.views import app_views
                  strict_slashes=False)
 def cities_all(state_id):
     """ returns list of all City objects linked to a given State """
-    state = storage.get("State", state_id)
+    state = storage.get(State, state_id)
     if state is None:
         abort(404)
     cities_all = []
@@ -26,7 +26,7 @@ def cities_all(state_id):
 @app_views.route('/cities/<city_id>', methods=['GET'])
 def city_get(city_id):
     """Executess GET method """
-    city = storage.get("City", city_id)
+    city = storage.get(City, city_id)
     if city is None:
         abort(404)
     city = city.to_json()
@@ -76,7 +76,7 @@ def city_put(city_id):
     for key, value in data.items():
         ignore_keys = ["id", "created_at", "updated_at"]
         if key not in ignore_keys:
-            setattr(city, key, value)
+            city.update(key, value)
     city.save()
     city = city.to_json()
     return jsonify(city), 200
