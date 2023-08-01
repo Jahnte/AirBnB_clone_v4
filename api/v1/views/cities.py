@@ -3,7 +3,7 @@
 
 from flask import jsonify, request, abort
 from models import storage
-from models.city import City
+from models.city import city
 from api.v1.views import app_views
 
 
@@ -75,7 +75,7 @@ def city_put(city_id):
     for key, value in data.items():
         ignore_keys = ["id", "created_at", "updated_at"]
         if key not in ignore_keys:
-            city.update(key, value)
+            setattr(city, key, value)
     city.save()
     city = city.to_json()
     return jsonify(city), 200
