@@ -69,8 +69,8 @@ class BaseModel:
         if "_sa_instance_state" in new_dict:
             del new_dict["_sa_instance_state"]
         
-        if not save_to_disk and "password" in new_dict:
-            del new_dict["password"]
+        if not save_to_disk:
+            new_dict.pop( "password", None)
 
         return new_dict
 
