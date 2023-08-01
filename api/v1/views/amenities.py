@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-
 """View for Amenity objects"""
-
 
 from flask import jsonify, request, abort
 from models import storage
